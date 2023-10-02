@@ -14,6 +14,12 @@ public class Pianiste implements IMusicien {
 		this.instrument = instrument;
 	}
 
+	public Pianiste(IInstrument instrument, String morceau) {
+		super();
+		this.instrument = instrument;
+		this.morceau = morceau;
+	}
+
 	@Override
 	public void jouer() {
 		System.out.println("Le pianiste joue : " + this.morceau + "(" + this.instrument.toString() + ")");

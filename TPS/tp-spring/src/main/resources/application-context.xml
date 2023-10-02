@@ -20,9 +20,13 @@
 
 	<!-- <bean id="guitare" class="spring.formation.Guitare"/> -->
 
+	<bean id="piano" class="spring.formation.Piano"/>
+
 	<bean id="pianiste" class="spring.formation.Pianiste">
-		<property name="instrument" ref="synthe"/>
-		<property name="morceau" value="Frère Jacques"/> 
+		<constructor-arg ref="piano"/>
+		<constructor-arg value="Frère Jacques"/>
+<!-- 		<property name="instrument" ref="synthe"/> -->
+<!-- 		<property name="morceau" value="Frère Jacques"/>  -->
 	</bean>
 
 </beans>
