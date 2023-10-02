@@ -20,4 +20,22 @@ public class Guitariste implements IMusicien {
 
 	}
 
+	public IInstrument getInstrument() {
+		return instrument;
+	}
+
+	public void setInstrument(IInstrument instrument) {
+		this.instrument = instrument;
+	}
+
+	public String getMorceau() {
+		return morceau;
+	}
+
+	public void setMorceau(String morceau) {
+		this.morceau = morceau;
+	}
+	
+	
+
 }
