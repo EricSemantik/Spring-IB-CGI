@@ -5,12 +5,19 @@
 	<groupId>spring.formation</groupId>
 	<artifactId>tp-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		
+		<spring.version>5.3.30</spring.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>5.3.30</version>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 </project>
