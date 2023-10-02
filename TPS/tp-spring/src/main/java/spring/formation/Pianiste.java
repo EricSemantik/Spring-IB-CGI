@@ -1,10 +1,7 @@
 package spring.formation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class Pianiste implements IMusicien {
 
-	
 	private IInstrument instrument;
 	private String morceau;
 
@@ -12,7 +9,6 @@ public class Pianiste implements IMusicien {
 		super();
 	}
 
-	@Autowired
 	public Pianiste(IInstrument instrument) {
 		super();
 		this.instrument = instrument;
@@ -28,7 +24,6 @@ public class Pianiste implements IMusicien {
 		return instrument;
 	}
 
-	
 	public void setInstrument(IInstrument instrument) {
 		this.instrument = instrument;
 	}
@@ -40,7 +35,5 @@ public class Pianiste implements IMusicien {
 	public void setMorceau(String morceau) {
 		this.morceau = morceau;
 	}
-	
-	
 
 }

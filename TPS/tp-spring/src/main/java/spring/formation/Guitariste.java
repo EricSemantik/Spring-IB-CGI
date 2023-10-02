@@ -1,6 +1,7 @@
 package spring.formation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class Guitariste implements IMusicien {
 	}
 
 	@Autowired
-	public Guitariste(IInstrument instrument, @Value("Vive le vent ...") String morceau) {
+	public Guitariste(@Qualifier("ukulele") IInstrument instrument, @Value("Vive le vent ...") String morceau) {
 		super();
 		this.instrument = instrument;
 		this.morceau = morceau;

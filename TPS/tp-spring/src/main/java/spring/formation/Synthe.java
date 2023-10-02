@@ -1,5 +1,8 @@
 package spring.formation;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Synthe implements IInstrument{
 
 	@Override
