@@ -1,5 +1,7 @@
 package spring.formation;
 
+import javax.annotation.PostConstruct;
+
 public class Pianiste implements IMusicien {
 
 	private IInstrument instrument;
@@ -7,6 +9,7 @@ public class Pianiste implements IMusicien {
 
 	public Pianiste() {
 		super();
+		System.out.println("Pianiste Constructeur : " + this.morceau);
 	}
 
 	public Pianiste(IInstrument instrument) {
@@ -40,6 +43,11 @@ public class Pianiste implements IMusicien {
 
 	public void setMorceau(String morceau) {
 		this.morceau = morceau;
+	}
+	
+	@PostConstruct
+	public void apresInjection() {
+		System.out.println("Pianiste - Après injection : " + this.morceau);
 	}
 
 }

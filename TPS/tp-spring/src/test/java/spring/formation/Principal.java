@@ -2,14 +2,16 @@ package spring.formation;
 
 import java.util.Scanner;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Principal {
+	
+	@Autowired
+	private IMusicien guitariste;
+	@Autowired
+	private IMusicien pianiste;
 
-	public static void main(String[] args) {
-//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-
+	public void run() {
 		Scanner clavier = new Scanner(System.in);
 
 		System.out.println("Quel Musicien dois jouer ?");
@@ -18,17 +20,16 @@ public class Principal {
 
 		int choix = clavier.nextInt();
 
-		String beanName = "pianiste";
+		
 		if (choix == 1) {
-			beanName = "guitariste";
+			guitariste.jouer();
+		} else {
+			pianiste.jouer();
 		}
 
-		IMusicien maxime = context.getBean(beanName, IMusicien.class);
-		maxime.jouer();
-
+		
 		clavier.close();
-		context.close();
-
+		
 	}
 
 }
