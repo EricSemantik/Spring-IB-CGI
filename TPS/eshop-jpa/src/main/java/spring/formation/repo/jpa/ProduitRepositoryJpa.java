@@ -8,17 +8,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import spring.formation.EshopApplication;
 import spring.formation.model.Produit;
 import spring.formation.repo.IProduitRepository;
 
 public class ProduitRepositoryJpa implements IProduitRepository {
-	protected final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EshopUnit");
-
 	public ProduitRepositoryJpa() {
 	}
 
 	public List<Produit> findAll() {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 
 		try {
 			return em.createQuery("select p from Produit p", Produit.class).getResultList();
@@ -35,7 +34,7 @@ public class ProduitRepositoryJpa implements IProduitRepository {
 	}
 
 	public Optional<Produit> findById(Long id) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 
 		try {
 			return Optional.of(em.createQuery("select p from Produit p where p.id = ?1", Produit.class)
@@ -52,7 +51,7 @@ public class ProduitRepositoryJpa implements IProduitRepository {
 	}
 
 	public Produit save(Produit entity) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 
 		try {
@@ -80,7 +79,7 @@ public class ProduitRepositoryJpa implements IProduitRepository {
 	}
 
 	public void deleteById(Long id) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 
 		em.getTransaction().begin();
 
@@ -101,7 +100,7 @@ public class ProduitRepositoryJpa implements IProduitRepository {
 
 	@Override
 	public List<Produit> findByPrixBetween(Double a, Double b) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 
 		try {
 			return em.createQuery("select p from Produit p where p.prixVente between ?1 and ?2", Produit.class)

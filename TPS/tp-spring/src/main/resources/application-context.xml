@@ -22,7 +22,7 @@
 
 	<bean id="piano" class="spring.formation.orchestre.Piano"/>
 
-	<bean id="pianiste" class="spring.formation.orchestre.Pianiste">
+	<bean id="pianiste" class="spring.formation.orchestre.Pianiste" scope="">
 		<constructor-arg ref="piano"/>
 		<constructor-arg value="Frère Jacques"/>
 <!-- 		<property name="instrument" ref="synthe"/> -->

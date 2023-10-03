@@ -8,17 +8,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import spring.formation.EshopApplication;
 import spring.formation.model.Fournisseur;
 import spring.formation.repo.IFournisseurRepository;
 
 public class FournisseurRepositoryJpa implements IFournisseurRepository {
-	protected final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EshopUnit");
-
+	
 	public FournisseurRepositoryJpa() {
 	}
 
 	public List<Fournisseur> findAll() {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 
 		try {
 			return em.createQuery("select f from Fournisseur f", Fournisseur.class).getResultList();
@@ -36,7 +36,7 @@ public class FournisseurRepositoryJpa implements IFournisseurRepository {
 
 	@Override
 	public Optional<Fournisseur> findById(Long id) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 
 		try {
 			return Optional
@@ -54,7 +54,7 @@ public class FournisseurRepositoryJpa implements IFournisseurRepository {
 	}
 
 	public Fournisseur save(Fournisseur entity) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 
 		try {
@@ -82,7 +82,7 @@ public class FournisseurRepositoryJpa implements IFournisseurRepository {
 	}
 
 	public void deleteById(Long id) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = EshopApplication.getInstance().getEmf().createEntityManager();
 
 		em.getTransaction().begin();
 
