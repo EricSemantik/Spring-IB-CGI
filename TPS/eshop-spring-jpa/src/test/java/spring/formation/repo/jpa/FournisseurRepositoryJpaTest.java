@@ -7,35 +7,26 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import spring.formation.config.ApplicationConfig;
 import spring.formation.model.Fournisseur;
 import spring.formation.repo.IFournisseurRepository;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ApplicationConfig.class)
 public class FournisseurRepositoryJpaTest {
-	private static AnnotationConfigApplicationContext context;
 
-	private static IFournisseurRepository repoFournisseur;
-
-	@BeforeClass
-	public static void initSpring() {
-		context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		repoFournisseur = context.getBean(IFournisseurRepository.class);
-	}
-
-	@AfterClass
-	public static void closeSpring() {
-		context.close();
-	}
+	@Autowired
+	private IFournisseurRepository repoFournisseur;
 
 	@Test
 	public void testFindAll() {
@@ -71,18 +62,27 @@ public class FournisseurRepositoryJpaTest {
 
 //	@Test
 	public void shouldUpdate() {
-		Long fournisseurId = this.getLastId();
-		String fournisseurNom = UUID.randomUUID().toString();
-		Fournisseur fournisseur = repoFournisseur.findById(fournisseurId).get();
+		// ARRANGE
+		Fournisseur fournisseur = new Fournisseur();
 
-		fournisseur.setNom(fournisseurNom);
-		repoFournisseur.save(fournisseur);
+		fournisseur.setNom("F1");
+		fournisseur.setResponsable("RESP");
 
-		fournisseur = repoFournisseur.findById(fournisseurId).get();
+		fournisseur = repoFournisseur.save(fournisseur);
+
+		// ACT
+		fournisseur = repoFournisseur.findById(fournisseur.getId()).get();
+
+		fournisseur.setNom("F2");
+		fournisseur.setResponsable("RESP2");
+		fournisseur = repoFournisseur.save(fournisseur);
+
+		// ASSERT
+		fournisseur = repoFournisseur.findById(fournisseur.getId()).get();
 
 		assertNotNull(fournisseur);
-		assertEquals(fournisseurId, fournisseur.getId());
-		assertEquals(fournisseurNom, fournisseur.getNom());
+		assertEquals("F2", fournisseur.getId());
+		assertEquals("RESP2", fournisseur.getNom());
 	}
 
 //	@Test

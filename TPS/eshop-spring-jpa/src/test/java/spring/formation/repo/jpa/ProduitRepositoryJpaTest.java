@@ -12,27 +12,23 @@ import java.util.UUID;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+import spring.formation.config.ApplicationConfig;
 import spring.formation.model.Fournisseur;
 import spring.formation.model.Produit;
 import spring.formation.repo.IProduitRepository;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:application-context.xml")
 public class ProduitRepositoryJpaTest {
-	private static ClassPathXmlApplicationContext context;
-
-	private static IProduitRepository repoProduit;
-
-	@BeforeClass
-	public static void initSpring() {
-		context = new ClassPathXmlApplicationContext("application-context.xml");
-		repoProduit = context.getBean(IProduitRepository.class);
-	}
-
-	@AfterClass
-	public static void closeSpring() {
-		context.close();
-	}
+	@Autowired
+	private IProduitRepository repoProduit;
 
 	@Test
 	public void testFindAll() {

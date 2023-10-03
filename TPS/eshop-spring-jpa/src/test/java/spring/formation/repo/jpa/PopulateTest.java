@@ -1,9 +1,10 @@
 package spring.formation.repo.jpa;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import spring.formation.config.ApplicationConfig;
 import spring.formation.model.Fournisseur;
@@ -11,24 +12,14 @@ import spring.formation.model.Produit;
 import spring.formation.repo.IFournisseurRepository;
 import spring.formation.repo.IProduitRepository;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ApplicationConfig.class)
 public class PopulateTest {
-	private static AnnotationConfigApplicationContext context;
+	@Autowired
+	private IFournisseurRepository repoFournisseur;
+	@Autowired
+	private IProduitRepository repoProduit;
 
-	private static IFournisseurRepository repoFournisseur;
-	private static IProduitRepository repoProduit;
-
-	@BeforeClass
-	public static void initSpring() {
-		context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		repoFournisseur = context.getBean(IFournisseurRepository.class);
-		repoProduit = context.getBean(IProduitRepository.class);
-	}
-	
-	@AfterClass
-	public static void closeSpring() {
-		context.close();
-	}
-	
 	@Test
 	public void populate() {
 		Fournisseur fournisseur = new Fournisseur();
@@ -37,7 +28,6 @@ public class PopulateTest {
 
 		fournisseur = repoFournisseur.save(fournisseur);
 
-		
 		Produit produit = new Produit("NEW");
 		produit.setPrixAchat(10d);
 		produit.setPrixVente(100d);
