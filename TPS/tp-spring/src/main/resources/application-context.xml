@@ -28,5 +28,17 @@
 <!-- 		<property name="instrument" ref="synthe"/> -->
 <!-- 		<property name="morceau" value="Frère Jacques"/>  -->
 	</bean>
+	
+	<bean id="spectateurAspect" class="spring.formation.aspect.Spectateur"/>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* spring.formation.*.jouer())" id="jouerPointcut"/>
+		
+		<aop:aspect ref="spectateurAspect">
+			<aop:before method="assoir" pointcut-ref="jouerPointcut"/>
+			<aop:after-returning method="applaudir" pointcut-ref="jouerPointcut"/>
+			<aop:after-throwing method="rembourser" throwing="ex" pointcut-ref="jouerPointcut"/>
+		</aop:aspect>
+	</aop:config>
 
 </beans>
