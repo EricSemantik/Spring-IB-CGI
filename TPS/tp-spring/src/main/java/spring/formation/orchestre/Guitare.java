@@ -1,4 +1,4 @@
-package spring.formation;
+package spring.formation.orchestre;
 
 import org.springframework.stereotype.Component;
 

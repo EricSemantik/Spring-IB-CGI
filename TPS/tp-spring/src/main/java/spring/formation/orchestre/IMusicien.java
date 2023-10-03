@@ -1,4 +1,4 @@
-package spring.formation;
+package spring.formation.orchestre;
 
 public interface IMusicien {
 	void jouer();

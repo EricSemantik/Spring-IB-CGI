@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import spring.formation.orchestre.IMusicien;
+
 public class Principal {
 	
 	@Autowired

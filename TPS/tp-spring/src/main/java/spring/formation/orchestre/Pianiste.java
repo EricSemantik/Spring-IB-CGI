@@ -1,4 +1,4 @@
-package spring.formation;
+package spring.formation.orchestre;
 
 import javax.annotation.PostConstruct;
 
@@ -25,7 +25,7 @@ public class Pianiste implements IMusicien {
 
 	@Override
 	public void jouer() {
-		if(true) {
+		if(false) {
 			throw new RuntimeException("Fausse note !");
 		}
 		System.out.println("Le pianiste joue : " + this.morceau + "(" + this.instrument.toString() + ")");
