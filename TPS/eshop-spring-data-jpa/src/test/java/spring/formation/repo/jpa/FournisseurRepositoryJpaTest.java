@@ -5,8 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -36,6 +38,17 @@ public class FournisseurRepositoryJpaTest {
 		assertNotEquals(0, fournisseurs.size());
 		assertNotEquals(Long.valueOf(0), fournisseurs.get(0).getId());
 		assertNotNull(fournisseurs.get(0).getNom());
+	}
+	
+	@Test
+	public void testFindAllFournisseurByEmails() {
+		Set<String> emails = new HashSet<String>();
+		emails.add("toto@gmail.com");
+		emails.add("titi@gmail.com");
+		
+		List<Fournisseur> fournisseurs = repoFournisseur.findAllFournisseurByEmails(emails);
+
+		assertEquals(0, fournisseurs.size());
 	}
 
 //	@Test

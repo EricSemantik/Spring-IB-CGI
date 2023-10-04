@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,6 +21,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "commande")
+@NamedQuery(name = "Commande.findAllGreaterThanPrixTotal", query="select c from Commande c where c.prixTotal > :prix")
 public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +31,7 @@ public class Commande {
 	@Column(name = "CMD_DATE")
 	@Temporal(TemporalType.DATE)
 	private Date date;
-
+		
 	private Double prixTotal;
 
 	@Enumerated(EnumType.ORDINAL)

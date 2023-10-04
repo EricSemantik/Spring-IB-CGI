@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -34,12 +35,17 @@ public class ApplicationConfig {
 	@Autowired
 	private Environment env;
 	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+	
 	// On crée la DataSource
 	@Bean
 	public BasicDataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 
-		dataSource.setDriverClassName(env.getProperty("db.driver"));
+		dataSource.setDriverClassName(this.driverClassName);
 		dataSource.setUrl(env.getProperty("db.url"));
 		dataSource.setUsername(env.getProperty("db.user"));
 		dataSource.setPassword(env.getProperty("db.password"));
