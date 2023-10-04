@@ -40,6 +40,45 @@ public class ProduitRepositoryJpaTest {
 		assertNotNull(produits.get(0).getLibelle());
 	}
 
+	@Test
+	public void findByPrixAchatBetween() {
+		// ARRANGE
+		int start = repoProduit.findByPrixAchatBetween(100.0,300.0).size();
+		
+		Produit produit = new Produit("NEW1");
+
+		produit.setPrixAchat(115d);
+		produit.setPrixVente(150d);
+		produit.setModele("MOD1");
+		produit.setReference("REF1");
+
+		produit = repoProduit.save(produit);
+		
+		produit = new Produit("NEW2");
+
+		produit.setPrixAchat(450d);
+		produit.setPrixVente(600d);
+		produit.setModele("MOD2");
+		produit.setReference("REF2");
+
+		produit = repoProduit.save(produit);
+
+		produit = new Produit("NEW3");
+
+		produit.setPrixAchat(298d);
+		produit.setPrixVente(350d);
+		produit.setModele("MOD3");
+		produit.setReference("REF3");
+
+		produit = repoProduit.save(produit);
+		
+		// ACT
+		int end = repoProduit.findByPrixAchatBetween(100.0,300.0).size();
+
+		// ASSERT
+		assertEquals(3, end-start);
+	}
+	
 //	@Test
 	public void testFindById() {
 		Long produitId = 1L;
