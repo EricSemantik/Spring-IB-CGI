@@ -15,6 +15,7 @@
 		<thymeleaf-layout-dialect.version>3.2.1</thymeleaf-layout-dialect.version>
 		<dbcp.version>2.10.0</dbcp.version>
 		<hibernate.version>5.6.9.Final</hibernate.version>
+		<hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
 		<postgresql.version>42.4.0</postgresql.version>
 		<spring.version>5.3.30</spring.version>
 		<spring-data-jpa.version>2.7.16</spring-data-jpa.version>
@@ -46,7 +47,14 @@
 			<version>${thymeleaf-layout-dialect.version}</version>
 		</dependency>
 
-<!-- JPA / HIBERNATE -->
+		<!-- VALIDATION / HIBERNATE-->		
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>${hibernate-validator.version}</version>
+		</dependency>
+
+		<!-- JPA / HIBERNATE -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>

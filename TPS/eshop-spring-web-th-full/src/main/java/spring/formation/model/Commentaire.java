@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "commentaire")
@@ -23,12 +27,14 @@ public class Commentaire {
 
 	@Column(name = "COM_DATE", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private Date date = new Date();
 
 	@Column(name = "COM_NOTE", nullable = false)
 	private int note = 0;
 
 	@Column(name = "COM_COMMENTAIRE", nullable = false)
+	@NotEmpty(message = "Le commentaire est obligatoire")
 	private String commentaire;
 
 	@ManyToOne
@@ -38,6 +44,19 @@ public class Commentaire {
 	@ManyToOne
 	@JoinColumn(name = "COM_CLIENT_ID")
 	private Client client;
+
+	public Commentaire() {
+		super();
+	}
+
+	public Commentaire(Date date, int note, String commentaire, Produit produit, Client client) {
+		super();
+		this.date = date;
+		this.note = note;
+		this.commentaire = commentaire;
+		this.produit = produit;
+		this.client = client;
+	}
 
 	public Long getId() {
 		return id;
