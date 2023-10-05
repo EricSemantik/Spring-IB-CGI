@@ -12,4 +12,7 @@ public interface IProduitRepository extends JpaRepository<Produit, Long> {
 	
 	@Query("select p from Produit p where p.stock > 5")
 	List<Produit> findAllProduitWithStock5();
+	
+	@Query("select distinct p from Produit p left join fetch p.fournisseur")
+	List<Produit> findAllWithFournisseur();
 }
